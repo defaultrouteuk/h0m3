@@ -1,8 +1,8 @@
 # IOS.sh script
-# Setup environment by cutting out the NTP address
-# Use NTPx environment value to add new addresses to existing ACL
+# Cut current ntp associations line by line and paste them into the ACL (ACL-NTP_PEERS)
+# Don't forget to enable the extended shell 'shell processing full'
+# For a temporary IOS.sh enable with 'terminal shell trace'
 
-let n=0
 
 function set_ntp_acl () {
  configure terminal
@@ -14,5 +14,4 @@ function set_ntp_acl () {
 for ntp in `show ntp ass | cut -f1 -d 'address' | cut -f1 -d 'sys.peer' | cut -c'3-16'` 
 do 
  set_ntp_acl
- let n++
 done
